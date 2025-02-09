@@ -1,0 +1,430 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Valentine's Surprise 💕</title>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Poppins', sans-serif;
+                text-align: center;
+                background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                overflow: hidden;
+                position: relative;
+            }
+            .progress-bar {
+            width: 90%;
+            background: #ddd;
+            height: 12px;
+            border-radius: 10px;
+            margin: 15px auto;
+            overflow: hidden;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .progress {
+            height: 100%;
+            background: #ff4d6d;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+        input, meter {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ff4d6d;
+            border-radius: 10px;
+            outline: none;
+            width: 80%;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .slider {
+            width: 80%;
+            margin-bottom: 10px;
+        }
+            .heart {
+                position: absolute;
+                color: #ff4d6d;
+                font-size: 20px;
+                animation: float 4s linear infinite;
+            }
+            @keyframes float {
+                0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+                100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+            }
+            .container {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                animation: fadeIn 1s ease-in;
+                max-width: 420px;
+                width: 85%;
+                position: relative;
+                text-align: center;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            button {
+                padding: 14px 28px;
+                margin: 10px;
+                font-size: 18px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+                transition: 0.3s ease-in-out;
+                animation: pulse 1.5s infinite;
+                border-radius: 25px;
+                font-family: 'Dancing Script', cursive;
+            }
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+            .yes-btn {
+                background: #ff4d6d;
+                color: white;
+                box-shadow: 0 4px 10px rgba(255, 77, 109, 0.5);
+            }
+            .yes-btn:hover {
+                background: #ff85a2;
+                color: #fff;
+                transform: scale(1.1);
+            }
+            .no-btn {
+                background: #444;
+                color: white;
+                position: absolute;
+                border-radius: 25px;
+                font-size: 16px;
+            }
+            h2 {
+                font-family: 'Dancing Script', cursive;
+                font-size: 28px;
+                color: #ff4d6d;
+            }
+            .hidden {
+                display: none;
+            }
+            .flower {
+                position: absolute;
+                bottom: 0;
+                opacity: 0;
+                animation: bloom 2s forwards;
+                font-size: 30px;
+            }
+            @keyframes bloom {
+                from { opacity: 0; transform: scale(0.5); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            input {
+                padding: 12px;
+                font-size: 16px;
+                border: 2px solid #ff4d6d;
+                border-radius: 10px;
+                outline: none;
+                width: 80%;
+                margin-bottom: 10px;
+                transition: border-color 0.3s ease-in-out;
+                font-family: 'Poppins', sans-serif;
+            }
+            input:focus {
+                border-color: #ff85a2;
+            }
+            .summary {
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    color: #ff4d6d;
+    margin-top: 15px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.final-message {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ff4d6d;
+    font-family: 'Dancing Script', cursive;
+    margin-top: 15px;
+}
+
+.final-image {
+    width: 200px;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+/* Modal Background */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Modal Text */
+.modal-content p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    color: #ff4d6d;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Modal Image */
+.modal-content img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Close Button */
+.close-btn {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    background: #ff85a2;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            background: #ddd;
+            border-radius: 50%;
+            margin: 0 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-dot.active {
+            background: #ff4d6d;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="step1">
+            <h2>Will you be my Valentine? 💖</h2>
+            <button class="yes-btn" onclick="nextStep(2)">Yes! 😍</button>
+            <button class="no-btn" id="noBtn">No 😢</button>
+        </div>
+
+        <div class="container hidden" id="step2">
+            <h2>Where should we go for dinner? 🍽️</h2>
+            <input type="text" placeholder="SAAN TAYO MAG EEATTTTT!!!!!!">
+            <button class="yes-btn" onclick="nextStep(3)">Next ➡️</button>
+        </div>
+        <div class="container hidden" id="step3">
+            <h2>How excited are you? 😊</h2>
+            <input type="range" min="1" max="10" value="5" class="slider" id="excitementSlider">
+            <p>Excitement Level: <span id="excitementLevel">5</span></p>
+            <button class="yes-btn" onclick="nextStep(4)">Next 💖</button>
+        </div>
+        <div class="container hidden" id="step4">
+            <h2>Pick a special date! 📅</h2>
+            <input type="date">
+            <button class="yes-btn" onclick="nextStep(5)">Next ➡️</button>
+        </div>
+
+        <div class="container hidden" id="step5">
+            <h2>You made me the happiest! ❤️</h2>
+            <div id="flowers"></div>
+        </div>
+
+        <div class="navigation">
+            <div class="nav-dot active"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+        </div>
+        <script>
+            
+            let currentStep = 1;
+            function nextStep(step) {
+    document.getElementById(`step${currentStep}`).classList.add('hidden');
+    document.getElementById(`step${step}`).classList.remove('hidden');
+    currentStep = step;
+  
+    if (step === 5) {
+        displaySummary();
+        bloomFlowers();
+    }
+    
+}
+function displaySummary() {
+    const restaurant = document.querySelector("#step2 input").value || "Not specified";
+    const excitement = document.getElementById("excitementSlider").value;
+    const date = document.querySelector("#step4 input").value || "Not selected";
+
+    const summary = `
+        <div class="summary">
+            <p><strong>📍 Restaurant:</strong> ${restaurant} 🍽️</p>
+            <p><strong>💖 Excitement Level:</strong> ${excitement}/10 😊</p>
+            <p><strong>📅 Date Chosen:</strong> ${date}</p>
+        </div>
+        <p class="final-message">No words can truly express how much you mean to me. You are my happiness, my love, and my greatest blessing. I can't wait to spend this special day with you!! 💕</p>
+        <img src="us2.jpg" alt="Us together" class="final-image">
+    `;
+
+    document.getElementById("flowers").innerHTML = summary;
+}
+            const noBtn = document.getElementById('noBtn');
+            noBtn.addEventListener('mouseover', function() {
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 50);
+                noBtn.style.left = `${x}px`;
+                noBtn.style.top = `${y}px`;
+            });
+            
+            function bloomFlowers() {
+                const flowers = document.getElementById('flowers');
+                for (let i = 0; i < 40; i++) {
+                    let flower = document.createElement('div');
+                    flower.classList.add('flower');
+                    flower.innerHTML = '🌸';
+                    flower.style.left = `${Math.random() * 100}%`;
+                    flower.style.animationDelay = `${i * 0.4}s`;
+                    flowers.appendChild(flower);
+                }
+            }
+            
+            function createHearts() {
+                setInterval(() => {
+                    let heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = `${Math.random() * 100}vw`;
+                    heart.style.animationDuration = `${2 + Math.random() * 3}s`;
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 5000);
+                }, 500);
+            }
+            createHearts();
+            const slider = document.getElementById('excitementSlider');
+        const excitementLevel = document.getElementById('excitementLevel');
+
+        slider.oninput = function() {
+            excitementLevel.innerHTML = this.value;
+        }
+        function nextStep(step) {
+             // Update navigation dots
+    updateNavDots(step);
+    // Hide modal if open
+    closeModal();
+
+    // Validate Step 2: Restaurant Name
+    if (currentStep === 2) {
+        const restaurant = document.querySelector("#step2 input").value.trim();
+        if (!restaurant) {
+            showModal();
+            return;
+        }
+    }
+
+    // Validate Step 3: Excitement Level (Slider)
+    if (currentStep === 3) {
+        const excitement = document.getElementById("excitementSlider").value;
+        if (!excitement || excitement < 1) {
+            showModal();
+            return;
+        }
+    }
+
+    // Validate Step 4: Date Picker
+    if (currentStep === 4) {
+        const date = document.querySelector("#step4 input").value.trim();
+        if (!date) {
+            showModal();
+            return;
+        }
+    }
+
+    // Hide current step, show next step
+    document.getElementById(`step${currentStep}`).classList.add('hidden');
+    document.getElementById(`step${step}`).classList.remove('hidden');
+    currentStep = step;
+
+    // If last step, show summary & flowers
+    if (step === 5) {
+        displaySummary();
+        bloomFlowers();
+    }
+}
+
+// Show modal function
+function showModal() {
+    document.getElementById("modal").style.display = "flex";
+}
+
+// Close modal function
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+function updateNavDots(step) {
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === step);
+            });
+        }
+
+
+        </script>
+        <div id="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
+            <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+                <img src="cat.jpg" alt="Cute Reminder" style="width: 20%; border-radius: 10px; margin-bottom: 10px;">
+                <p style="font-size: 18px; color: #ff4d6d; font-weight: bold;">Sagutan mo bebe!!!!!!! 💖</p>
+                <button onclick="closeModal()" style="background: #ff4d6d; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Okay! 🥰</button>
+            </div>
+        </div>
+        
+    </body>
+    </html>
